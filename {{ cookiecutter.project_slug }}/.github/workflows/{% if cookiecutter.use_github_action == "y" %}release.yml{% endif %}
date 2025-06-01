@@ -46,12 +46,12 @@ jobs:
             [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
             eval "$(pyenv init - bash)"
             export PYTHONPATH=".:$PYTHONPATH"
-            pyenv local {{ '{{ cookiecutter.project_slug }}' }}
+            pyenv local {{ cookiecutter.project_slug }}
             poetry lock
             poetry install
             python manage.py migrate
             python manage.py collectstatic --noinput
-            sudo supervisorctl restart {{ '{{ cookiecutter.project_slug }}' }}
+            sudo supervisorctl restart {{ cookiecutter.project_slug }}
             {% if cookiecutter.use_celery == "y" %}
-            sudo supervisorctl restart {{ '{{ cookiecutter.project_slug }}' }}-celery
+            sudo supervisorctl restart {{ cookiecutter.project_slug }}_celery
             {% endif %}
