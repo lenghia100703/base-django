@@ -28,11 +28,12 @@ CELERY_TASK_EAGER_PROPAGATES=True
 
 # CACHE
 CACHE_URL=redis://localhost:6379/0
-CACHE_PREFIX=
+CACHE_PREFIX={{ cookiecutter.project_slug }}
 CACHE_TIMEOUT=2592000
 
 {% if cookiecutter.use_s3 == "y" -%}
 # AWS
+USE_S3=False
 AWS_ACCESS_KEY_ID=
 AWS_SECRET_ACCESS_KEY=
 AWS_STORAGE_BUCKET_NAME=
