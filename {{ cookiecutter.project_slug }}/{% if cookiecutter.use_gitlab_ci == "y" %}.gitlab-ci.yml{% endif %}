@@ -1,0 +1,42 @@
+stages:
+  - test
+  - deploy
+
+variables:
+  PYENV_ROOT: "$HOME/.pyenv"
+  PATH: "$PYENV_ROOT/bin:$PATH"
+  POETRY_VIRTUALENVS_CREATE: "false"
+  PYTHONPATH: ".:$PYTHONPATH"
+
+before_script:
+  - python --version
+  - pip install poetry
+  - poetry install
+
+test:
+  stage: test
+  script:
+    - poetry run pytest
+
+deploy:
+  stage: deploy
+  only:
+    - /^release-.*$/
+  script:
+    - |
+      ssh -o StrictHostKeyChecking=no $SERVER_USERNAME@$SERVER_HOST << 'EOF'
+        cd $PROJECT_DIR
+        git fetch --all
+        git reset --hard origin/master
+        export PYENV_ROOT="$HOME/.pyenv"
+        [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+        eval "$(pyenv init - bash)"
+        export PYTHONPATH=".:$PYTHONPATH"
+        pyenv local your_project_slug
+        poetry lock
+        poetry install
+        python manage.py migrate
+        python manage.py collectstatic --noinput
+        sudo supervisorctl restart your_project_slug
+        sudo supervisorctl restart your_project_slug-celery
+      EOF

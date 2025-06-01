@@ -2,12 +2,14 @@
     "project_name": "Project Template",
     "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
     "project_short_description": "This is a template for easily and quickly initing a new Project.",
-    "author_name": "Glinteco Developers",
-    "author_email": "developers@glinteco.com",
+    "author_name": "nghialvm",
+    "author_email": "lenghia1007@gmail.com",
     "timezone": "UTC",
     "use_debug_toolbar": "y",
     "use_drf": "y",
-    "only_api": "n",
+    "only_api": "y",
     "use_celery": "y",
-    "use_s3": "y"
+    "use_s3": "y",
+    "use_github_action": "y",
+    "use_gitlab_ci": "n"
 }

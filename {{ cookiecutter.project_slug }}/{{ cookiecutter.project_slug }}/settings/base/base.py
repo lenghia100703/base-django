@@ -28,3 +28,6 @@ LOG_LEVEL = config("LOG_LEVEL", default="ERROR")
 WSGI_APPLICATION = "wsgi.application"
 ROOT_URLCONF = "urls"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+BACKEND_URL = config("BACKEND_URL", default="")
+APP_URLS = config("APP_URLS", default=[], cast=list)

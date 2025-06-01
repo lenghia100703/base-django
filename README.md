@@ -14,12 +14,12 @@ pip install cookiecutter
 
 ```bash
 # Clone from project template
-cookiecutter https://github.com/lenghia100703/Project-Template/
+cookiecutter https://github.com/lenghia100703/base-django/
 # or by using ssh config name
-cookiecutter git+ssh://ssh_config_name/lenghia100703/Project-Template
+cookiecutter git+ssh://ssh_config_name/lenghia100703/base-django
 # or
 
-cookiecutter git@github.com:lenghia100703/Project-Template.git
+cookiecutter git@github.com:lenghia100703/base-django.git
 
 # Change the current working directory to the new project directory
 cd <PROJECT_DIRECTORY>
